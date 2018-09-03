@@ -2,29 +2,19 @@
 
 import UIKit
 
-var str = "Hello, playground"
-
-func getMilk(howManyMilks : Int, howMuchMoneyWasGiven : Int) -> Int {
+func calculateBMI(weight: Double, height: Double) -> Double {
+    //let bmi = weight / (height * height)
+    let bmi = weight / pow(height, 2)
     
-    print("Go to the shops")
-    print("buy \(howManyMilks) cartons of milk")
+    if bmi > 25 {
+        print("You are overweight")
+    } else if bmi > 18.5 && bmi < 25 {
+        print("You have a normal weight")
+    } else if bmi < 18.5 {
+        print("You are underweight")
+    }
     
-    let priceToPay = howManyMilks * 2
-    
-    print("pay $\(priceToPay)")
-    print("come home")
-    
-    let change = howMuchMoneyWasGiven - priceToPay
-    
-    return change
-    
+    return bmi
 }
 
-let ammountOfChange = "\(getMilk(howManyMilks: 4, howMuchMoneyWasGiven: 10))"
-
-func loadMilk(howManyMilk : Int) -> Int {
-    var result = 12 * howManyMilk
-    return result
-}
-
-var milkCount = loadMilk(howManyMilk: 5)
+var bmiResult = calculateBMI(weight: 70, height: 1.63)
