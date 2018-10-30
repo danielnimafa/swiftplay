@@ -3,37 +3,44 @@
 import UIKit
 import Foundation
 
-let intArray = [2,5,7,3,4,29,56,72,34,55,333]
-let stringArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
-
-func findIndexOfArray<T: Comparable> (array: [T], key: T) -> Int? {
-    for (index, element) in array.enumerated() {
-        if element == key {
-            return index
-        }
-    }
-    
-    return nil
+struct Person {
+    let firstName: String
+    let lastName: String
+    let age: Int
 }
 
-findIndexOfArray(array: intArray, key: 55)
-findIndexOfArray(array: stringArray, key: "g")
+let peoples = [
+    Person(firstName: "Daniel", lastName: "Prastiwa", age: 28),
+    Person(firstName: "Ramadhania", lastName: "Kayla", age: 3),
+    Person(firstName: "Yas", lastName: "Min", age: 3),
+    Person(firstName: "Daniel", lastName: "Sahuleka", age: 29),
+    Person(firstName: "Daniel", lastName: "Bedingsfield", age: 30),
+    Person(firstName: "Tony", lastName: "Stark", age: 30),
+    Person(firstName: "Chris", lastName: "Hewoth", age: 22),
+    Person(firstName: "Captain", lastName: "America", age: 22),
+    Person(firstName: "Thanos", lastName: "Stone", age: 20)
+]
 
-// -------------------- Calculate BMI
-
-//func calculateBMI(weight: Double, height: Double) -> Double {
-//    //let bmi = weight / (height * height)
-//    let bmi = weight / pow(height, 2)
-//
-//    if bmi > 25 {
-//        print("You are overweight")
-//    } else if bmi > 18.5 && bmi < 25 {
-//        print("You have a normal weight")
-//    } else if bmi < 18.5 {
-//        print("You are underweight")
-//    }
-//
-//    return bmi
+//let groupedDictionary = Dictionary(grouping: peoples) { (person) -> Character in
+//    return person.firstName.first!
 //}
-//
-//var bmiResult = calculateBMI(weight: 70, height: 1.63)
+
+let groupedDictionary = Dictionary(grouping: peoples) { (person) -> Int in
+    return person.age
+}
+
+var groupedPeople = [[Person]]()
+
+let keys = groupedDictionary.keys.sorted()
+keys.forEach({
+    groupedPeople.append(groupedDictionary[$0]!)
+})
+
+groupedPeople.forEach({
+    $0.forEach({
+        print($0)
+    })
+    print("----------")
+})
+
+
