@@ -1,4 +1,4 @@
-//: Playground - noun: a place where people can play
+//: Swift 4 grouping functions
 
 import UIKit
 import Foundation
@@ -25,8 +25,8 @@ let peoples = [
 //    return person.firstName.first!
 //}
 
-let groupedDictionary = Dictionary(grouping: peoples) { (person) -> Int in
-    return person.age
+let groupedDictionary = Dictionary(grouping: peoples) { (person) -> String in
+    return person.firstName
 }
 
 var groupedPeople = [[Person]]()
