@@ -1,32 +1,65 @@
-//: Swift 4 grouping functions
+//: Swift 4 Stacks and Generics
 
 import UIKit
 import Foundation
 
-func filterGreaterThanValue(value: Int, numbers: [Int]) -> [Int] {
-    var filteredSetOfNumber = [Int]()
-    for num in numbers {
-        if num > value {
-            filteredSetOfNumber.append(num)
-        }
+class Node<T> {
+    let value: T
+    var next: Node?
+    init(value: T) {
+        self.value = value
     }
-    return filteredSetOfNumber
 }
 
-//let filteredList = filterGreaterThanValue(value: 5, numbers: [1,2,3,4,5,7,10,20])
-//print(filteredList)
-
-func filterWithPredicate(closure: (Int) -> Bool, numbers: [Int]) -> [Int] {
-    var filteredNumber = [Int]()
-    for num in numbers {
-        if closure(num) {
-            filteredNumber.append(num)
-        }
+class Stack<T> {
+    
+    var top: Node<T>?
+    
+    func push(_ value: T) {
+        let oldTop = top
+        top = Node(value: value)
+        top?.next = oldTop
     }
-    return filteredNumber
+    
+    func pop() -> T? {
+        let currentTop = top
+        top = top?.next
+        return currentTop?.value
+    }
+    
+    func peek() -> T? {
+        return top?.value
+    }
+    
 }
 
-let filteredNums = filterWithPredicate(closure: { (num) -> Bool in
-    return num > 2
-}, numbers: [1,2,3,4,5,7,10,20])
-print(filteredNums)
+struct User {
+    let name: String
+    let username: String
+}
+
+let ayas = User(name: "Daniel", username: "@danielnimafa")
+let umak = User(name: "Bejo", username: "@bejoo")
+
+let userStack = Stack<User>()
+userStack.push(ayas)
+userStack.push(umak)
+
+let firstUserPop = userStack.pop()
+print(firstUserPop?.name ?? "NULL")
+
+let stack = Stack<Int>()
+stack.push(1)
+stack.push(2)
+stack.push(3)
+
+stack.peek()
+
+let firstPop = stack.pop()
+stack.peek()
+let secondPop = stack.pop()
+stack.peek()
+let thirdPop = stack.pop()
+stack.peek()
+let finalPop = stack.pop()
+stack.peek()
