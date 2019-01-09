@@ -66,6 +66,27 @@ let namaBaju: String = category.title
 var meg = Dog(name: "Meg", breed: "Beagle", age: 5)
 meg.name = "Lucy"
 
+struct Kucing {
+    var name: String
+    var legs: Int
+    var eyes: Int
+}
+
+func newEyes(_ kucing: inout Kucing) {
+    kucing.eyes = 5
+}
+
+func newLegs(_ kucing: Kucing) {
+    var cat = kucing
+    cat.legs = 10
+    print("Kucing legs inside function is \(cat.legs)")
+}
+
+var kucing = Kucing(name: "Moky", legs: 4, eyes: 2)
+//newEyes(&kucing)
+newLegs(kucing)
+print("Kucing legs is same as before, \(kucing.legs)")
+
 // -------------------- Closure
 
 //class Firebase {
