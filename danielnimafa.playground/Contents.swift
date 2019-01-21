@@ -4,6 +4,14 @@ import UIKit
 import Foundation
 
 
+print("\n-------Chaining map+filter+reduce-------\n")
+// -------Chaining map+filter+reduce-------
+
+let arrayOfArrays = [[1,2,3,4],[5,6,7,8,4]]
+let sumOfSquaresOfEvenNumbers = arrayOfArrays.flatMap{$0}.filter{ $0 % 2 == 0 }.map{ $0 * $0 }.reduce(0,+)
+print(arrayOfArrays.flatMap{$0}.filter{ $0 % 2 == 0 })
+
+print("//-------------------- Array\n")
 //-------------------- Array
  
 //“Creating an Array with a Default Value”
@@ -17,6 +25,15 @@ print("New Array: \(sixDoubles)")
  
 var array = [6,4,2,7,9,1]
 //print("sorted: \(array.sorted())")
+let arraySorted1 = Array(array.sorted().reversed())
+print(arraySorted1)
+
+for element in array.sorted(by: {$0 > $1}) {
+    print("\(element)")
+}
+
+let arraySorted2 = array.sorted { $0 > $1 }
+print("Factorial from array: \(arraySorted2.reduce(1,*))")
 
 func addOne(n1: Int) -> Int {
     return n1 + 1
@@ -111,6 +128,7 @@ for (index, value) in shoppingList.enumerated() {
 print(shoppingList)
 print(shoppingList.count)
 
+print("\n-----Set-----\n")
 // ------- Set
 var letters = Set<Character>()
 letters.insert("d")
@@ -143,19 +161,79 @@ let symmetricDiff = oddDigits.symmetricDifference(singleDigitPrimeNumber)
 print("SymmetricDifference: \(symmetricDiff)")
 
 
-
+print("\n-----Map-----\n")
 // --------------- Map
 
-let bookAmount = ["harry potter":100.0, "junglebook":100.0]
-let result = bookAmount.map { (key, value) in
+let bookAmount = ["harry potter":100.0, "junglebook":1000.0]
+/*let result = bookAmount.map { (key, value) in
     return (key.capitalized, value * 0.5)
 }
 print("Map Dictionary: \(result)")
-print("Tuple: \(result[0].0)")
+print("Tuple: \(result[0].0)")*/
 
 let lengthInMeters: Set = [4.0,6.2,8.9]
-let lengthInFeet = lengthInMeters.map { (meters) in
-    meters * 3.2808
+//let lengthInFeet = lengthInMeters.map { (meters) in
+//    meters * 3.2808
+//}
+//print("Length in Feet: \(lengthInFeet)")
+//print(lengthInFeet[0])
+
+let newArr = [1,2,4,5]
+let indexAndNum = newArr.enumerated().map { (index, value) in
+    return "\(index):\(value)"
 }
-print("Length in Feet: \(lengthInFeet)")
-print(lengthInFeet[0])
+print(indexAndNum)
+
+print("\n-------Filter-------\n")
+// -------Filter-------
+//Use filter to loop over a collection and return an Array containing only those elements that match an include condition.
+
+let arrayOfInteger = [1,2,3,4,5,6,7]
+print(arrayOfInteger.filter{$0 % 2 == 0})
+
+print(bookAmount.filter { $1 > 100 })
+
+
+print("\n-------Reduce-------\n")
+// -------Reduce-------
+//Use reduce to combine all items in a collection to create a single new value.
+
+let numbers = [1,2,3,4,5]
+let numberSum = numbers.reduce(0, { x, y in
+    x + y
+})
+//let reducedNumber = numbers.reduce(1) { $0 * $1 }
+let reducedNumber = numbers.reduce(1,*)
+print("Reduced Number: \(reducedNumber)")
+
+let codes = ["abc", "cde", "ghi"]
+let text = codes.reduce("") { $0 + $1 }
+print(text)
+
+let reducedAmountOnDict2 = bookAmount.reduce(0) { (result, tuple) in
+    return result + tuple.value
+}
+
+let reducedBooknamesOnDict2 = bookAmount.reduce("Books are ") { $0 + $1.0 + " " }
+
+let reduceSet = lengthInMeters.reduce(0.0) { $0 + $1 }
+
+print("Dict reduced: \(reduceSet)")
+
+
+print("\n-------Flatmap-------\n")
+// -------Flatmap-------
+// Flatmap is used to flatten a collection of collections . But before flattening the collection, we can apply map to each elements.
+let kodes = [["abc", "def", "ghi"], ["abc", "def", "ghi"]]
+let newKodes = kodes.flatMap { $0.map { $0.uppercased() } }
+let newCodes = codes.flatMap { (member) in return member.uppercased()}
+
+let dictArrayFlatmap = [["key1":"value1", "key2":"value2"], ["key3":"value3"]]
+let flatmapDict = dictArrayFlatmap.flatMap { $0 }
+
+var dictionary = [String:String]()
+
+flatmapDict.forEach {
+    dictionary[$0.0] = $0.1
+}
+print(dictionary)
