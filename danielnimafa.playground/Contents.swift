@@ -3,14 +3,6 @@
 import UIKit
 import Foundation
 
-
-print("\n-------Chaining map+filter+reduce-------\n")
-// -------Chaining map+filter+reduce-------
-
-let arrayOfArrays = [[1,2,3,4],[5,6,7,8,4]]
-let sumOfSquaresOfEvenNumbers = arrayOfArrays.flatMap{$0}.filter{ $0 % 2 == 0 }.map{ $0 * $0 }.reduce(0,+)
-print(arrayOfArrays.flatMap{$0}.filter{ $0 % 2 == 0 })
-
 print("//-------------------- Array\n")
 //-------------------- Array
  
@@ -39,12 +31,78 @@ func addOne(n1: Int) -> Int {
     return n1 + 1
 }
 
+let cities = ["Amsterdam", "New York", "San Francisco"]
+cities.forEach { city in
+    print(city)
+}
+
+let ages = ["Antoine": 28, "Jaap": 2, "Jack": 72]
+ages.forEach { (name, age) in
+    print("\(name) is \(age) years old")
+}
+
+(0...3).reversed().forEach { index in
+    print("\(index)..")
+}
+
+// ------------------------------------------------------------------------------------
+
+// ForIn vs forEach
+/*Although the examples above seem to show the same behaviors, this is not completely true.*/
+var evenNumbers = [Int]()
+for number in (0...100) {
+    guard evenNumbers.count < 10 else {
+        break
+    }
+    
+    guard number % 2 == 0 else {
+        continue
+    }
+    evenNumbers.append(number)
+}
+print(evenNumbers)
+
+let eventNumber = (0...100).filter { number -> Bool in
+    return number % 2 == 0
+    }.prefix(10)
+print("Event Number: \(eventNumber)")
+
+// ------------------------------------------------------------------------------------
+
+// While Loop
+/*While loops are less often used, but can be really useful. It’s basically executing its statements while the condition is true. The following example is rolling dice until the max amount of tries is reached.*/
+
+func rollDice() -> Int {
+    return (1...6).randomElement()!
+}
+
+let maxTries = 6
+var tries = 0
+var score = 0
+
+while tries < maxTries {
+    score += rollDice()
+    tries += 1
+}
+
+// ------------------------------------------------------------------------------------
+
+// Repeat While loops
+repeat {
+    score += rollDice()
+    tries += 1
+} while tries < maxTries
+
+print("Total score is \(score)")
+
+// ------------------------------------------------------------------------------------
+
 //print("Mapping array: \(array.map{addOne(n1: $0)})")
 
 array = array.map(addOne)
 print("addone ONE: \(array)")
 
- //-------------------- Fibonacci
+//-------------------- Fibonacci
  //fibonacci 0,1,1,2,3,5,8
 
 func fibonacciFun(_ n : Int) {
@@ -237,3 +295,12 @@ flatmapDict.forEach {
     dictionary[$0.0] = $0.1
 }
 print(dictionary)
+
+print("\n-------Chaining map+filter+reduce-------\n")
+// -------Chaining map+filter+reduce-------
+
+let arrayOfArrays = [[1,2,3,4],[5,6,7,8,4]]
+let sumOfSquaresOfEvenNumbers = arrayOfArrays.flatMap{$0}.filter{ $0 % 2 == 0 }.map{ $0 * $0 }
+print("sumOfSquaresOfEvenNumbers: \(sumOfSquaresOfEvenNumbers.reduce(0,+))")
+print(arrayOfArrays.flatMap{$0}.filter{ $0 % 2 == 0 })
+
