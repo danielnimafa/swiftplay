@@ -5,6 +5,22 @@ import Foundation
 
 print("//-------------------- Array\n")
 //-------------------- Array
+
+extension Array where Element: Numeric {
+    func customSum() -> Element {
+        return self.reduce(0, {$0 + $1})
+    }
+}
+
+extension Array where Element == String {
+    func concatenate() -> String {
+        return self.reduce("", {$0 + $1 + " "})
+    }
+}
+
+["Hello", "From", "Youtube", "Channel"].concatenate()
+
+print([1.5,2.7].customSum())
  
 //“Creating an Array with a Default Value”
 var threeDoubles = Array(repeating: 0.0, count: 3)
