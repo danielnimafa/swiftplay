@@ -197,13 +197,46 @@ for (index, value) in shoppingList.enumerated() {
     print("Item \(index), value: \(value)")
 }
 
-//shoppingList.remove(at: 0)
-
 print(shoppingList)
 print(shoppingList.count)
 
-print("\n-----Set-----\n")
-// ------- Set
+
+print("\n------------Dictionary------------\n")
+
+let dicts: [String:Int] = ["Ada Wong":30, "Leon Kennedy":29, "Claire Redfield":23]
+print(dicts["Ada Wong"]!)
+
+//init empty collection
+var scores = Dictionary<String, Int>()
+
+// Dicitonary Default Values
+let favoriteIceCream: [String:String] = [
+    "Bejo":"Coklat",
+    "Sugeng":"Strawberry",
+    "Domblang":"Vanilla"
+]
+print(favoriteIceCream["Sempla", default:"Ra ONO"])
+
+
+
+
+print("\n------------Tuple------------\n")
+
+var people = (name: "Taylor Swift", age: 20)
+print(people.0)
+print(people.name)
+print(people.age)
+
+
+
+
+print("\n------------Set------------\n")
+
+let colors: Set<String> = Set(["red", "green", "blue"])
+let colors2 = Set(["red", "green", "blue", "red", "blue"])
+print(colors)
+print(colors2)
+
 var letters = Set<Character>()
 letters.insert("d")
 letters.insert("a")
@@ -218,7 +251,7 @@ print(favoriteGenres.description)
 
 // :: Iterating over Set
 for genre in favoriteGenres.sorted() { print(genre) }
-favoriteGenres.forEach { print($0) }
+favoriteGenres.sorted().forEach { print($0) }
 
 // :: Performing Set Operations
 let oddDigits: Set = [1, 3, 5, 7, 9]
@@ -235,22 +268,60 @@ let symmetricDiff = oddDigits.symmetricDifference(singleDigitPrimeNumber)
 print("SymmetricDifference: \(symmetricDiff)")
 
 
-print("\n-----Map-----\n")
+
+print("\n------------Enumerations------------\n")
+
+enum Result {
+    case success
+    case failure
+}
+
+let workResult = Result.success
+print(workResult)
+
+// Enum associated value
+enum Activity {
+    case bored
+    case running(destination: String)
+    case talking(topic: String)
+    case singing(volume: Int)
+}
+
+let talking = Activity.talking(topic: "Gossip")
+print(talking)
+
+// Enum Raw Values
+
+enum Planet: Int {
+    case mercury = 1
+    case venus
+    case earth
+    case mars
+}
+
+let earth = Planet(rawValue: 2)
+print(earth)
+
+
+
+
+print("\n------------Map------------\n")
 // --------------- Map
 
 let bookAmount = ["harry potter":100.0, "junglebook":1000.0]
-/*let result = bookAmount.map { (key, value) in
+let result = bookAmount.map { (key, value) in
     return (key.capitalized, value * 0.5)
 }
 print("Map Dictionary: \(result)")
-print("Tuple: \(result[0].0)")*/
+print("Tuple: \(result[0].0)")
 
 let lengthInMeters: Set = [4.0,6.2,8.9]
-//let lengthInFeet = lengthInMeters.map { (meters) in
-//    meters * 3.2808
-//}
-//print("Length in Feet: \(lengthInFeet)")
-//print(lengthInFeet[0])
+
+let lengthInFeet = lengthInMeters.map { (meters) in
+    meters * 3.2808
+}
+print("Length in Feet: \(lengthInFeet)")
+print(lengthInFeet[0])
 
 let newArr = [1,2,4,5]
 let indexAndNum = newArr.enumerated().map { (index, value) in
@@ -258,21 +329,16 @@ let indexAndNum = newArr.enumerated().map { (index, value) in
 }
 print(indexAndNum)
 
-print("\n-------Filter-------\n")
-// -------Filter-------
-//Use filter to loop over a collection and return an Array containing only those elements that match an include condition.
-
-let arrayOfInteger = [1,2,3,4,5,6,7]
-print(arrayOfInteger.filter{$0 % 2 == 0})
-
-print(bookAmount.filter { $1 > 100 })
 
 
-print("\n-------Reduce-------\n")
+
+
+print("\n------------Reduce------------\n")
 // -------Reduce-------
 //Use reduce to combine all items in a collection to create a single new value.
 
 let numbers = [1,2,3,4,5]
+let numberSumSum = numbers.reduce(0, +)
 let numberSum = numbers.reduce(0, { x, y in
     x + y
 })
@@ -287,12 +353,32 @@ print(text)
 let reducedAmountOnDict2 = bookAmount.reduce(0) { (result, tuple) in
     return result + tuple.value
 }
+print("Reduce Amount: \(reducedAmountOnDict2)")
 
 let reducedBooknamesOnDict2 = bookAmount.reduce("Books are ") { $0 + $1.0 + " " }
+print("/n Books Are: \(reducedBooknamesOnDict2)")
 
 let reduceSet = lengthInMeters.reduce(0.0) { $0 + $1 }
 
 print("Dict reduced: \(reduceSet)")
+
+
+
+
+
+
+print("\n------------Filter------------\n")
+// -------Filter-------
+//Use filter to loop over a collection and return an Array containing only those elements that match an include condition.
+
+let arrayOfInteger = [1,2,3,4,5,6,7]
+print(arrayOfInteger.filter{$0 % 2 == 0})
+
+print(bookAmount.filter { $1 > 100 })
+
+
+
+
 
 
 print("\n-------Flatmap-------\n")
