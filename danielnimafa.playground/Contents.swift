@@ -3,6 +3,15 @@
 import UIKit
 import Foundation
 
+
+var driving = { (value: Int) -> Int in
+    print("Joss \(value)")
+    return value + 10
+}
+
+driving(10)
+
+
 func filterGreaterThanValue(value: Int, numbers: [Int]) -> [Int] {
     var filteredSetOfNumber = [Int]()
     for num in numbers {
