@@ -28,6 +28,51 @@ print(myNum)
 
 print("--------------------- writing Throwing Functions  ---------------------")
 
+
+enum LoginError: Error {
+    case unknownUser
+}
+
+func authenticate(username: String) throws {
+    if username == "Anonymous" {
+        throw LoginError.unknownUser
+    }
+    
+    print("Welcome, \(username)!")
+}
+
+do {
+    try authenticate(username: "Anonymous")
+} catch {
+    print("Error: \(error)")
+    switch error {
+    case LoginError.unknownUser:
+        print("Unknown User!!!")
+    default:
+        print("JOsss")
+    }
+}
+
+enum CatProblems: Error {
+    case notACat
+    case unfriendly
+}
+func strokeCat(_ name: String) throws {
+    if name == "Mr Bitey" {
+        throw CatProblems.unfriendly
+    } else if name == "Lassie" {
+        throw CatProblems.notACat
+    } else {
+        print("You stroked \(name).")
+    }
+}
+
+do {
+    try strokeCat("Lassie")
+} catch let err {
+    print("Error: \(err.localizedDescription)")
+}
+
 enum PasswordError: Error {
     case obvious
 }
@@ -44,7 +89,7 @@ let pass = "password"
 do {
     try checkPassword(pass)
 } catch let err {
-    print(err)
+    print("Error: \(err)")
 }
 
 
