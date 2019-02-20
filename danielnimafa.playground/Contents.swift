@@ -4,6 +4,23 @@ import UIKit
 import Foundation
 
 
+// Linear Search --------------------------------------------------------
+
+func linearSearch<T: Equatable>(_ array: [T], _ object: T) -> Int? {
+    
+    for (index, obj) in array.enumerated() where obj == object {
+        print("Index: \(index), object: \(obj)")
+        return index
+    }
+    
+    return nil
+}
+
+print(linearSearch([5,3,2,1], 1))
+
+
+
+
 // Stacks --------------------------------------------------------
 
 public struct Stack<T> {
