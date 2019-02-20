@@ -3,6 +3,109 @@
 import UIKit
 import Foundation
 
+
+// Stacks --------------------------------------------------------
+
+public struct Stack<T> {
+    
+    fileprivate var array = [T]()
+    
+    public var isEmpty: Bool {
+        return array.isEmpty
+    }
+    
+    public var count: Int {
+        return array.count
+    }
+    
+    public mutating func push(_ element: T) {
+        array.append(element)
+    }
+    
+    public mutating func pop() -> T? {
+        return array.popLast()
+    }
+    
+    public var top: T? {
+        return array.last
+    }
+    
+}
+
+var tumpuk = Stack<Int>()
+tumpuk.push(1)
+tumpuk.push(2)
+tumpuk.push(3)
+tumpuk.push(4)
+tumpuk.push(5)
+tumpuk.pop()
+print(tumpuk.top!)
+
+//class Node<T> {
+//    let value: T
+//    var next: Node?
+//    init(value: T) {
+//        self.value = value
+//    }
+//}
+//
+//class Stack<T> {
+//
+//    var top: Node<T>?
+//
+//    func push(_ value: T) {
+//        let oldTop = top
+//        top = Node(value: value)
+//        top?.next = oldTop
+//    }
+//
+//    func pop() -> T? {
+//        let currentTop = top
+//        top = top?.next
+//        return currentTop?.value
+//    }
+//
+//    func peek() -> T? {
+//        return top?.value
+//    }
+//
+//}
+//
+//struct User {
+//    let name: String
+//    let username: String
+//}
+//
+//let ayas = User(name: "Daniel", username: "@danielnimafa")
+//let umak = User(name: "Bejo", username: "@bejoo")
+//
+//let userStack = Stack<User>()
+//userStack.push(ayas)
+//userStack.push(umak)
+//
+//let firstUserPop = userStack.pop()
+//print(firstUserPop?.name ?? "NULL")
+//
+//let stack = Stack<Int>()
+//stack.push(1)
+//stack.push(2)
+//stack.push(3)
+//
+//stack.peek()
+//
+//let firstPop = stack.pop()
+//stack.peek()
+//let secondPop = stack.pop()
+//stack.peek()
+//let thirdPop = stack.pop()
+//stack.peek()
+//let finalPop = stack.pop()
+//stack.peek()
+
+
+
+// LinkedList ----------------------------------------------------------------
+
 public class Node<T> {
     
     var value: T
@@ -120,63 +223,3 @@ print(kucings.nodeAt(index: 0)!.value)
 
 // ------------------------------------------------------------------------------
 
-//class Node<T> {
-//    let value: T
-//    var next: Node?
-//    init(value: T) {
-//        self.value = value
-//    }
-//}
-//
-//class Stack<T> {
-//
-//    var top: Node<T>?
-//
-//    func push(_ value: T) {
-//        let oldTop = top
-//        top = Node(value: value)
-//        top?.next = oldTop
-//    }
-//
-//    func pop() -> T? {
-//        let currentTop = top
-//        top = top?.next
-//        return currentTop?.value
-//    }
-//
-//    func peek() -> T? {
-//        return top?.value
-//    }
-//
-//}
-//
-//struct User {
-//    let name: String
-//    let username: String
-//}
-//
-//let ayas = User(name: "Daniel", username: "@danielnimafa")
-//let umak = User(name: "Bejo", username: "@bejoo")
-//
-//let userStack = Stack<User>()
-//userStack.push(ayas)
-//userStack.push(umak)
-//
-//let firstUserPop = userStack.pop()
-//print(firstUserPop?.name ?? "NULL")
-//
-//let stack = Stack<Int>()
-//stack.push(1)
-//stack.push(2)
-//stack.push(3)
-//
-//stack.peek()
-//
-//let firstPop = stack.pop()
-//stack.peek()
-//let secondPop = stack.pop()
-//stack.peek()
-//let thirdPop = stack.pop()
-//stack.peek()
-//let finalPop = stack.pop()
-//stack.peek()
