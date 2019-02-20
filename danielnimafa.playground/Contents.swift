@@ -3,141 +3,180 @@
 import UIKit
 import Foundation
 
-func numberOfTims(in array: [String]) -> Int {
-    var count = 0
-    for name in array {
-        if name == "Tim" {
-            count += 1
+public class Node<T> {
+    
+    var value: T
+    
+    var next: Node<T>?
+    weak var previous: Node<T>?
+    
+    init(value: T) {
+        self.value = value
+    }
+}
+
+public class LinkedList<T> {
+    fileprivate var head: Node<T>?
+    private var tail: Node<T>?
+    
+    public var isEmpty: Bool {
+        return head == nil
+    }
+    
+    public var first: Node<T>? {
+        return head
+    }
+    
+    public var last: Node<T>? {
+        return tail
+    }
+    
+    public func append(value: T) {
+        let newNode = Node(value: value)
+        
+        if let tailNode = tail {
+            newNode.previous = tailNode
+            tailNode.next = newNode
+        } else {
+            head = newNode
         }
-    }
-    return count
-}
-
-
-
-print("--------------------- inout parameters  ---------------------")
-
-func doubleInPlace(number: inout Int) {
-    number *= 2
-}
-
-var myNum = 10
-doubleInPlace(number: &myNum)
-print(myNum)
-
-
-print("--------------------- writing Throwing Functions  ---------------------")
-
-
-enum LoginError: Error {
-    case unknownUser
-}
-
-func authenticate(username: String) throws {
-    if username == "Anonymous" {
-        throw LoginError.unknownUser
+        
+        tail = newNode
     }
     
-    print("Welcome, \(username)!")
-}
-
-do {
-    try authenticate(username: "Anonymous")
-} catch {
-    print("Error: \(error)")
-    switch error {
-    case LoginError.unknownUser:
-        print("Unknown User!!!")
-    default:
-        print("JOsss")
-    }
-}
-
-enum CatProblems: Error {
-    case notACat
-    case unfriendly
-}
-func strokeCat(_ name: String) throws {
-    if name == "Mr Bitey" {
-        throw CatProblems.unfriendly
-    } else if name == "Lassie" {
-        throw CatProblems.notACat
-    } else {
-        print("You stroked \(name).")
-    }
-}
-
-do {
-    try strokeCat("Lassie")
-} catch let err {
-    print("Error: \(err.localizedDescription)")
-}
-
-enum PasswordError: Error {
-    case obvious
-}
-
-func checkPassword(_ password: String) throws -> Bool {
-    if password == "password" {
-        throw PasswordError.obvious
-    }
-    
-    return true
-}
-
-let pass = "password"
-do {
-    try checkPassword(pass)
-} catch let err {
-    print("Error: \(err)")
-}
-
-
-
-
-print("--------------------- Variadic Functions ---------------------")
-
-func square(numbers: Int...) {
-    for number in numbers {
-        print("\(number) squared is \(number * number)")
-    }
-}
-
-square(numbers: 2,4,5,6,3,1)
-
-
-
-let intArray = [2,5,7,3,4,29,56,72,34,55,333]
-let stringArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
-
-func findIndexOfArray<T: Comparable> (array: [T], key: T) -> Int? {
-    for (index, element) in array.enumerated() {
-        if element == key {
-            return index
+    public func nodeAt(index: Int) -> Node<T>? {
+        
+        if index >= 0 {
+            var node = head
+            var i = index
+            
+            while node != nil {
+                if i == 0 { return node }
+                i -= 1
+                node = node!.next
+            }
         }
+        
+        return nil
     }
     
-    return nil
+    public func removaAll() {
+        head = nil
+        tail = nil
+    }
+    
+    public func remove(node: Node<T>) -> T {
+        let prev = node.previous
+        let next = node.next
+        
+        if let prev = prev {
+            prev.next = next
+        } else {
+            head = next
+        }
+        next?.previous = prev
+        
+        if next == nil {
+            tail = prev
+        }
+        
+        node.previous = nil
+        node.next = nil
+        
+        return node.value
+    }
 }
 
-findIndexOfArray(array: intArray, key: 55)
-findIndexOfArray(array: stringArray, key: "g")
+extension LinkedList: CustomStringConvertible {
+    
+    public var description: String {
+        var text = "["
+        var node = head
+        
+        while node != nil {
+            text += "\(node!.value)"
+            node = node!.next
+            if node != nil { text += ", " }
+        }
+        
+        return text + "]"
+    }
+}
 
-// -------------------- Calculate BMI
+let kucings = LinkedList<String>()
+kucings.append(value: "Moky")
+kucings.append(value: "Gembul")
+kucings.append(value: "Molly")
+kucings.append(value: "Cimong")
 
-//func calculateBMI(weight: Double, height: Double) -> Double {
-//    //let bmi = weight / (height * height)
-//    let bmi = weight / pow(height, 2)
-//
-//    if bmi > 25 {
-//        print("You are overweight")
-//    } else if bmi > 18.5 && bmi < 25 {
-//        print("You have a normal weight")
-//    } else if bmi < 18.5 {
-//        print("You are underweight")
+let numbers = LinkedList<Int>()
+numbers.append(value: 3)
+numbers.append(value: 7)
+numbers.append(value: 9)
+
+print(kucings.last?.value)
+
+print(kucings.nodeAt(index: 0)!.value)
+
+// ------------------------------------------------------------------------------
+
+//class Node<T> {
+//    let value: T
+//    var next: Node?
+//    init(value: T) {
+//        self.value = value
 //    }
-//
-//    return bmi
 //}
 //
-//var bmiResult = calculateBMI(weight: 70, height: 1.63)
+//class Stack<T> {
+//
+//    var top: Node<T>?
+//
+//    func push(_ value: T) {
+//        let oldTop = top
+//        top = Node(value: value)
+//        top?.next = oldTop
+//    }
+//
+//    func pop() -> T? {
+//        let currentTop = top
+//        top = top?.next
+//        return currentTop?.value
+//    }
+//
+//    func peek() -> T? {
+//        return top?.value
+//    }
+//
+//}
+//
+//struct User {
+//    let name: String
+//    let username: String
+//}
+//
+//let ayas = User(name: "Daniel", username: "@danielnimafa")
+//let umak = User(name: "Bejo", username: "@bejoo")
+//
+//let userStack = Stack<User>()
+//userStack.push(ayas)
+//userStack.push(umak)
+//
+//let firstUserPop = userStack.pop()
+//print(firstUserPop?.name ?? "NULL")
+//
+//let stack = Stack<Int>()
+//stack.push(1)
+//stack.push(2)
+//stack.push(3)
+//
+//stack.peek()
+//
+//let firstPop = stack.pop()
+//stack.peek()
+//let secondPop = stack.pop()
+//stack.peek()
+//let thirdPop = stack.pop()
+//stack.peek()
+//let finalPop = stack.pop()
+//stack.peek()
