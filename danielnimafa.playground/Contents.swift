@@ -3,6 +3,48 @@
 import UIKit
 import Foundation
 
+// returning closures
+func mlayu() -> (String, Int) -> Void {
+    return { place, jeru in
+        print("Mlayu nang \(place), jerune \(jeru) meter")
+    }
+}
+
+let lapo = mlayu()
+lapo("tambak", 10)
+
+
+// closures with multiple parameters
+func hitungLuas(x: Int, y: Int, luas: (Int, Int) -> Int) {
+    let message = "Hasil perhitungan luas \(x) dengan \(y) = "
+    let hasilPerhitungan = luas(x,y)
+    print("\(message)\(hasilPerhitungan)")
+}
+
+hitungLuas(x: 4, y: 16) { $0 * $1 * $0 }
+
+func travel(action: (String) -> String) {
+    let destination = action("Madinah")
+    print("Saya naik mobil, lalu \(destination)")
+}
+
+travel { "pergi ke kota \($0)" }
+
+let mlaku = { (place: String) -> String in
+    var aku = "Aku"
+    let kamu = "Kamu"
+    aku = kamu
+    return "\(aku) mlaku - mlaku nang \(place)"
+}
+
+let message = mlaku("Mall")
+print(message)
+
+let dolan = { (place: String) in
+    print("Aku dolan nang \(place)")
+}
+
+dolan("Jogja")
 
 var driving = { (value: Int) -> Int in
     print("Joss \(value)")
@@ -65,6 +107,19 @@ print(strings)
 
 
 print("\n----------------Capturing Values----------------\n")
+
+func traveling() -> (String) -> Void {
+    var counter = 1
+    return { place in
+        print("\(counter). Saya traveling ke \(place)")
+        counter += 1
+    }
+}
+
+let lala = traveling()
+for _ in 0..<5 {
+    lala("Jogja")
+}
 
 func makeIncrementer(forIncrement amount: Int) -> () -> Int {
     var runningTotal = 0
