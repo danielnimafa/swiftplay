@@ -3,6 +3,34 @@
 import UIKit
 import Foundation
 
+// Closure Reference cycles
+
+class HTMLElement {
+    
+    var name: String
+    var text: String
+    
+    lazy var asHtml: () -> String = { [weak self] in
+        guard let this = self else { return "" }
+        return "<\(this.name)>\(this.text)</\(this.name)>"
+    }
+    
+    init(name: String, text: String) {
+        self.name = name
+        self.text = text
+    }
+    
+    deinit {
+        print("HTMLElement \(name) is being deallocated")
+    }
+    
+}
+
+var paragraph: HTMLElement? = HTMLElement(name: "p", text: "Some sample paragraph body text")
+paragraph?.asHtml()
+paragraph = nil
+
+
 // returning closures
 func mlayu() -> (String, Int) -> Void {
     return { place, jeru in
