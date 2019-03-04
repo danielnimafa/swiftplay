@@ -3,38 +3,17 @@
 import UIKit
 import Foundation
 
+// ------------------------------ Methods
 
-class Shape {
-    var area: Double?
+struct City {
+    var population: Int
     
-    func calculateArea(valA: Double, valB: Double) {
-        
+    func collectTaxes() -> Int {
+        return population * 1000
     }
 }
 
-class Triangle: Shape {
-    
-    override func calculateArea(valA: Double, valB: Double) {
-        area = (valA * valB) / 2
-        print("\(area ?? 0.0)")
-    }
-}
+let london = City(population: 9_000_000)
+let taxes = london.collectTaxes()
+print(taxes)
 
-class Rectangle: Shape {
-    
-    override func calculateArea(valA: Double, valB: Double) {
-        
-        area = (valA * valB)
-    }
-}
-
-class Trapesium: Shape {
-    
-    override func calculateArea(valA: Double, valB: Double) {
-        area = valA + valB
-    }
-}
-
-let tri = Triangle()
-tri.calculateArea(valA: 11.9, valB: 2.5)
-print("Hasil kalkulasi \(tri.area!)")
