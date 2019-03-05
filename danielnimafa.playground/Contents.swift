@@ -3,6 +3,41 @@
 import UIKit
 import Foundation
 
+// ------------------------------ Access Control
+
+struct Member {
+    private var id: String
+    
+    init(givenId: String) {
+        self.id = givenId
+    }
+    
+    func identify() -> String {
+        return "My social ID is \(self.id)"
+    }
+}
+
+var newMember = Member(givenId: "AON09344")
+print(newMember.identify())
+
+
+// ------------------------------ Static properties and methods
+
+struct Student {
+    static var classSize = 0
+    var name: String
+    
+    init(givenName: String) {
+        self.name = givenName
+        Student.classSize += 1
+    }
+}
+
+let ed = Student(givenName: "Ed")
+let joko = Student(givenName: "Joko")
+print(Student.classSize)
+
+
 // ------------------------------ Lazy Properties
 
 struct FamilyTree {
