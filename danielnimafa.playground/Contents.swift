@@ -3,6 +3,29 @@
 import UIKit
 import Foundation
 
+// ------------------------------ Lazy Properties
+
+struct FamilyTree {
+    init() {
+        print("Creating family tree!")
+    }
+}
+
+struct Person {
+    var name: String
+    lazy var familyTree = FamilyTree()
+    
+    init(givenName: String) {
+        self.name = givenName
+        print("Create new person")
+    }
+}
+
+var ed = Person(givenName: "Johny")
+ed.familyTree
+print(ed.name)
+
+
 // ------------------------------ Initializers
 
 struct User {
