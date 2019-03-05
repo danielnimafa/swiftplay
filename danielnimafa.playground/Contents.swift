@@ -3,6 +3,24 @@
 import UIKit
 import Foundation
 
+// ------------------------------ Initializers
+
+struct User {
+    var username: String
+    
+    init() {
+        username = "Anonymous"
+        print("Creating new User!!!")
+    }
+    
+    mutating func updateUsername(uname: String) {
+        self.username = uname
+    }
+}
+
+var user = User()
+user.updateUsername(uname: "danielnimafa")
+print(user.username)
 
 // ------------------------------ Properties and methods of arrays
 
