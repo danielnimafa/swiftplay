@@ -3,6 +3,19 @@
 import UIKit
 import Foundation
 
+
+// ------------------------------ Properties and methods of arrays
+
+var toys = ["Woody"]
+
+print(toys.count)
+toys.append("Buzz")
+print(toys.index(of: "Buzz")!)
+print(toys.sorted())
+toys.remove(at: 0)
+
+
+
 // ------------------------------ Properties and methods of strings
 
 let string = "Do or do not, there is no try."
