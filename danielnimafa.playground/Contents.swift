@@ -4,26 +4,20 @@ import UIKit
 import Foundation
 
 
-// -------------------- Deinitializers
-// The fourth difference between classes and structs is tha
+// -------------------- Mutability
+// The final difference between classes and structs is the way they deal with constants. If you have a constant struct with a variable property, that property can’t be changed because the struct itself is constant.
 
-class Person {
-    var name = "John Doe"
-    
-    init() {
-        print("\(name) is alive!")
-    }
-    
-    deinit {
-        print("\(name) is no more!")
-    }
-    
-    func printGreeting() {
-        print("Hello, I'm \(name)")
-    }
+// However, if you have a constant class with a variable property, that property can be changed. Because of this, classes don’t need the mutating keyword with methods that change properties; that’s only needed with structs.
+
+class Singer {
+    var name = "Taylor Swift"
 }
 
-for _ in 1...3 {
-    let person = Person()
-    person.printGreeting()
+let taylor = Singer()
+taylor.name = "Ed Sheeran"
+print(taylor.name)
+
+// If you want to stop that from happening you need to make the property constant:
+class OtherSinger {
+    let name = "Taylor Swift"
 }
