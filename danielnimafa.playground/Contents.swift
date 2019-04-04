@@ -3,6 +3,10 @@
 import UIKit
 import Foundation
 
+for i in 0..<7 {
+    print(i)
+}
+
 
 print("--------------- Skipping Loops ---------------")
 
@@ -91,6 +95,7 @@ while counter < 100 {
     if counter % 10 == 5 {
         print("Matching number found")
     }
+    print("Counter:", counter)
 }
 
 var itemsSold: Int = 0
@@ -101,10 +106,10 @@ while itemsSold < 5000 {
     }
 }
 
-var counter = 2
-while counter < 64 {
-    print("\(counter) is a power of 2.")
-    counter *= 2
+var counterCount = 2
+while counterCount < 64 {
+    print("\(counterCount) is a power of 2.")
+    counterCount *= 2
 }
 
 var averageScore = 2.5
@@ -138,9 +143,9 @@ while colorCounter < 5 {
     colorCounter += 1
 }
 
-while 0 < 5 {
-    print("I'm counting to 5!")
-}
+//while 0 < 5 {
+//    print("I'm counting to 5!")
+//}
 
 var pianoLesson = 1
 while pianoLesson < 5 {
@@ -186,6 +191,16 @@ for i in 1...15 {
         }
     }
 }
+
+
+albums.filter{ $0 == "1990" }.forEach { (album) in
+    print("Alboum found: \(album)")
+}
+
+albums.filter{ $0 != "1990" }.forEach{ print("Album: \($0)") }
+
+albums.filter{$0 != "1990"}.map { $0.uppercased() }.forEach{ print("Album Mapped: \($0)") }
+
 
 
 
